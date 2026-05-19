@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          sudo apt update
+          sudo apt install -y cmake g++ ninja-build
+
+      - name: Configure
+        run: cmake -S Structural/Proxy -B build -G Ninja
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Run tests
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Build package
+        run: cmake --build build --target package
+
+      - name: Upload deb
+        uses: actions/upload-artifact@v4
+        with:
+          name: deb-package
+          path: build/*.deb
