@@ -42,11 +42,12 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: deb-package
-        path: build/*.deb
+        path: Structural/Proxy/build/*.deb
 
     - name: Create GitHub Release and upload asset
       uses: softprops/action-gh-release@v2
       with:
-        files: build/*.deb
+        files: Structural/Proxy/build/*.deb
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
