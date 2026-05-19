@@ -36,12 +36,9 @@ jobs:
         name: deb-package
         path: build/*.deb
 
-    - name: Create Release and upload asset
+    - name: Create GitHub Release and upload asset
       uses: softprops/action-gh-release@v2
       with:
-        files: build/*.deb
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         files: build/*.deb
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
