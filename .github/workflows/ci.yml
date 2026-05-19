@@ -24,13 +24,19 @@ jobs:
         cmake -B build -DCMAKE_BUILD_TYPE=Release
 
     - name: Build project
-      run: cmake --build build -- -j$(nproc)
+      run: |
+        cd Structural/Proxy
+        cmake --build build -- -j$(nproc)
 
     - name: Run tests
-      run: ctest --test-dir build --output-on-failure
+      run: |
+        cd Structural/Proxy/build
+        ctest --test-dir build --output-on-failure
 
     - name: Package DEB with CPack
-      run: cmake --build build --target package
+      run: |
+        cd Structural/Proxy
+        cmake --build build --target package
 
     - name: Upload DEB as artifact
       uses: actions/upload-artifact@v4
