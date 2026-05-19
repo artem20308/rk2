@@ -30,7 +30,7 @@ jobs:
 
     - name: Run tests
       run: |
-        cd Structural/Proxy/build
+        cd Structural/Proxy
         ctest --test-dir build --output-on-failure
 
     - name: Package DEB with CPack
